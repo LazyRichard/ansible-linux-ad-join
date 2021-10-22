@@ -1,0 +1,21 @@
+---
+# handlers file for join_domain
+- name: Restart smbd
+  service:
+    name: smbd
+    state: restarted
+
+- name: Restart nmbd
+  service:
+    name: nmbd
+    state: restarted
+
+- name: Restart winbind
+  service:
+    name: winbind
+    state: restarted
+
+- name: Restart sssd
+  service:
+    name: sssd
+    state: restarted

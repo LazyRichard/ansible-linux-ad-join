@@ -1,0 +1,8 @@
+---
+- name: Add sudoers for active directory groups
+  become: yes
+  template:
+    src: "{{ template_sudoers }}"
+    dest: "{{ sudoers_path }}/ad_{{ domain_name | replace('.', '_')}}"
+    validate: visudo -cf %s
+  when: (domain_sudoers | default([], true)) | length

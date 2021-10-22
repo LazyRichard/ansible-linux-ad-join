@@ -1,0 +1,8 @@
+---
+# vars file for join_domain
+sudoers_path: /etc/sudoers.d
+sssd_config_path: /etc/sssd/sssd.conf
+samba_config_path: /etc/samba/smb.conf
+
+template_sudoers_sssd: sudoers.sssd.j2
+template_sudoers_winbind: sudoers.winbind.j2

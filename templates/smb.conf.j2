@@ -1,0 +1,38 @@
+[global]
+    workgroup = {{ domain_netbios_name }}
+
+    server string = %h server (Samba, {{ ansible_distribution }})
+
+#### Debugging/Accounting ####
+    log file = /var/log/samba/log.%m
+
+    max log size = 1000
+
+    logging = file
+
+    panic action = /usr/share/samba/panic-action %d
+
+#### Active directory ####
+    realm = {{ domain_name | upper }}
+
+    security = ads
+    kerberos method = system keytab
+
+    idmap config * : backend = tdb
+    idmap config * : range = {{ winbind_idmap_default_range }}
+    idmap config {{ domain_netbios_name }} : {{ winbind_idmap_current_domain_range }}
+
+    template homedir = /home/%U@%D
+    template shell = /bin/bash
+
+    winbind use default domain = {{ set_default_domain }}
+    winbind refresh tickets = yes
+    winbind offline logon = yes
+    winbind enum groups = no
+    winbind enum users = no
+
+#### Extended ACLs ####
+    inherit acls = yes
+    vfs objects = acl_xattr
+    map acl inherit = yes
+    store dos attributes = yes

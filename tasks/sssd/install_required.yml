@@ -1,0 +1,10 @@
+---
+- name: Install required package
+  become: yes
+  apt:
+    pkg:
+      - sssd-ad
+      - sssd-tools
+      - realmd
+      - adcli
+      - dnsutils # some arm-based system need this

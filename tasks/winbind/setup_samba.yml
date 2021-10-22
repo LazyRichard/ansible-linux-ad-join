@@ -1,0 +1,11 @@
+---
+- name: Setup smb.conf
+  become: yes
+  template:
+    src: smb.conf.j2
+    dest: "{{ samba_config_path }}"
+    validate: testparm --suppress-prompt %s
+  notify:
+    - Restart smbd
+    - Restart nmbd
+    - Restart winbind

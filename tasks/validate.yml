@@ -1,0 +1,24 @@
+---
+- name: validate join_method
+  assert:
+    that:
+      - join_method in ['sssd', 'winbind']
+    fail_msg: "'join_method' should be 'sssd' or 'winbind'"
+- name: validate domain info
+  assert:
+    that:
+      - "{{ item }} is defined and {{ item }}"
+    fail_msg: "'{{ item }}' should be set and not be empty"
+  loop: [domain_name]
+- name: validate domain netbios name
+  assert:
+    that:
+      - "{{ item }} is defined and {{ item }}"
+    fail_msg: "if join_method is 'winbind' than '{{ item }}' should be set and not be empty"
+  loop: [domain_netbios_name]
+  when: join_method == "winbind"
+- name: validate credentials
+  assert:
+    that:
+      - domain_admin_password
+    fail_msg: "'domain_admin_password' should be set"

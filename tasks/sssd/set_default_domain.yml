@@ -1,0 +1,10 @@
+---
+- name: Set "'{{ domain_name }}'" as default domain
+  become: yes
+  community.general.ini_file:
+    path: "{{ sssd_config_path }}"
+    section: sssd
+    option: default_domain_suffix
+    value: "{{ domain_name }}"
+  when: set_default_domain | bool
+  notify: Restart sssd

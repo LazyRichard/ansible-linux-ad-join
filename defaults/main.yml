@@ -1,0 +1,41 @@
+---
+## defaults file for join_domain
+
+## Active directory domain
+join_method: sssd # sssd or winbind
+domain_name: 
+domain_netbios_name: 
+domain_admin_user: Administrator
+domain_admin_password:
+
+## Misc
+# This will populate the below groups to sudoers
+# If you want to use another method (like sssd sudoers rules) than leave as blank
+domain_sudoers:
+  - "administrators"
+  - "domain admins"
+  - "enterprise admins"
+user_home_creation: yes
+set_default_domain: yes
+
+## sssd
+### login policy
+sssd_permit_deny_all: yes
+sssd_permit_allow_groups:
+  - "administrators"
+  - "domain admins"
+  - "enterprise admins"
+sssd_permit_allow_users:
+sssd_permit_block_groups:
+sssd_permit_block_users:
+
+# winbind
+### idmap
+winbind_idmap_default_range: "10000-999999"
+winbind_idmap_current_domain_range: "2000000-2999999"
+### login policy
+winbind_permit_allow_sids:
+  - "S-1-5-32-544" # BUILTIN\administrator
+winbind_permit_allow_names:
+  - "domain admins"
+  - "enterprise admins"

@@ -1,0 +1,9 @@
+# Active directory sudoers
+# Reference: https://www.suse.com/support/kb/doc/?id=000018877
+{% for item in domain_sudoers %}
+{% if (set_default_domain | bool) %}
+"%{{ item }}" ALL=(ALL) ALL
+{% else %}
+"%{{ domain_netbios_name }}\{{ item }}" ALL=(ALL) ALL
+{% endif %}
+{% endfor %}

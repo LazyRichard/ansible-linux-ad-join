@@ -1,0 +1,10 @@
+---
+- name: Install required package
+  become: yes
+  apt:
+    pkg:
+      - realmd
+      - samba
+      - winbind
+      - libpam-winbind
+      - libnss-winbind

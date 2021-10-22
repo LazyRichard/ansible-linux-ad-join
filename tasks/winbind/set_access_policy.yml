@@ -1,0 +1,36 @@
+---
+- name: Query sids
+  block:
+  - name: Query sids via wbinfo (default domain)
+    command: "wbinfo -n '{{ item }}'"
+    loop: "{{ winbind_permit_allow_names | default([], true) }}"
+    register: raw_query_result
+    when: set_default_domain | bool
+  - name: "Query sids via wbinfo ({{ domain_netbios_name }})"
+    command: "wbinfo -n '{{ domain_netbios_name}}\{{ item }}'"
+    loop: "{{ winbind_permit_allow_names | default([], true) }}"
+    register: raw_query_result
+    when: not (set_sefault_domain | bool)
+  - debug:
+      var: raw_query_result
+  - name: Result post processing
+    set_fact:
+      winbind_permit_query_sids: "{{ raw_query_result.results | map(attribute='stdout') | map('split', ' ') | map('first') | list }}"
+  - debug:
+      var: winbind_permit_query_sids
+  - name: Merge sids
+    set_fact:
+      winbind_permit_allow_sids: "{{ (winbind_permit_allow_sids | default([], true)) + winbind_permit_query_sids }}"
+  - debug:
+      var: winbind_permit_allow_sids
+  when: winbind_permit_allow_names
+
+- name: Set access policy
+  become: true
+  community.general.ini_file:
+    path: "{{ winbind_security_config_path }}"
+    section: global
+    option: require_membership_of
+    value: "{{ winbind_permit_allow_sids | join(',') }}"
+    backup: yes
+  when: winbind_permit_allow_sids

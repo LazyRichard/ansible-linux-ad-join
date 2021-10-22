@@ -1,0 +1,5 @@
+# Active directory sudoers
+# Reference: https://www.suse.com/support/kb/doc/?id=000018877
+{% for item in domain_sudoers %}
+"%{{ item }}@{{ domain_name }}" ALL=(ALL) ALL
+{% endfor %}

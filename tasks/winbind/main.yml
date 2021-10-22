@@ -1,0 +1,6 @@
+---
+- include: ./install_required.yml
+- include: ./join_domain.yml
+- include: ./setup_samba.yml
+- include: ./setup_nsswitch.yml
+- include: ./set_access_policy.yml

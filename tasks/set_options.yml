@@ -1,0 +1,5 @@
+---
+- name: Set pam home direction creation
+  become: yes
+  command: pam-auth-update --enable mkhomedir
+  when: user_home_creation | bool

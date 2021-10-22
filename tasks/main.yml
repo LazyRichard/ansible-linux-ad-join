@@ -1,0 +1,18 @@
+---
+# tasks file for join_domain
+- name: Validate variables
+  include: ./validate.yml
+
+- name: "Install required by script package"
+  include: "./install_required_script.yml"
+
+- name: "Join '{{ domain_name }}' using '{{ join_method }}'"
+  include: "./{{ join_method }}/main.yml"
+
+- name: Setup sudoers
+  include: ./setup_sudoers.yml
+  vars:
+    - template_sudoers: "{{ lookup('vars','template_sudoers_' + join_method) }}"
+
+- name: Set options
+  include: ./set_options.yml

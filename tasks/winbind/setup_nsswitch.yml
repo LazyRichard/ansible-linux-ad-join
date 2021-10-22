@@ -1,0 +1,16 @@
+- name: Append winbind entry in nsswitch
+  block:
+    - name: Append passwd entry
+      become: yes
+      replace:
+        path: /etc/nsswitch.conf
+        regexp: '^(passwd:.*)'
+        replace: '\1 winbind'
+        backup: yes
+    - name: Append group entry
+      become: yes
+      replace:
+        path: /etc/nsswitch.conf
+        regexp: '(^group:.*)'
+        replace: '\1 winbind'
+        backup: yes

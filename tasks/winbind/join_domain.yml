@@ -1,0 +1,16 @@
+---
+- name: Join domain
+  become: yes
+  expect:
+    command: "realm join --membership-software=samba --client-software=winbind --user {{ domain_admin_user }} --os-name {{ ansible_distribution }} --os-version {{ ansible_distribution_version }} {{ domain_name }}"
+    responses:
+        Password for *: "{{ domain_admin_password }}"
+  when: computer_name is not defined
+
+- name: Join domain with "{{ computer_name }}"
+  become: yes
+  expect:
+    command: "realm join --membership-software=samba --client-software=winbind --computer-name {{ computer_name }} --user {{ domain_admin_user }} --os-name {{ ansible_distribution }} --os-version {{ ansible_distribution_version }} {{ domain_name }}"
+    responses:
+        Password for *: "{{ domain_admin_password }}"
+  when: computer_name is defined and computer_name
