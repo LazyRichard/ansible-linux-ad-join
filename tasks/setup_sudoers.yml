@@ -3,6 +3,6 @@
   become: yes
   template:
     src: "{{ template_sudoers }}"
-    dest: "{{ sudoers_path }}/ad_{{ domain_name | replace('.', '_')}}"
+    dest: "{{ sudoers_path }}/00-ad-{{ domain_name | replace('.', '-')}}"
     validate: visudo -cf %s
   when: (domain_sudoers | default([], true)) | length

@@ -8,3 +8,4 @@
 - include: ./join_domain.yml
 - include: ./set_default_domain.yml
 - include: ./set_access_policy.yml
+- include: ./set_dyndns.yml

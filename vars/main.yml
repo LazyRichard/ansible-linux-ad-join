@@ -2,6 +2,7 @@
 # vars file for join_domain
 sudoers_path: /etc/sudoers.d
 sssd_config_path: /etc/sssd/sssd.conf
+sssdh_configd_path: /etc/sssd/conf.d
 samba_config_path: /etc/samba/smb.conf
 
 template_sudoers_sssd: sudoers.sssd.j2
