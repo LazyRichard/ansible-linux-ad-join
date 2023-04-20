@@ -1,6 +1,6 @@
 ---
-- include: ./install_required.yml
-- include: ./join_domain.yml
-- include: ./setup_samba.yml
-- include: ./setup_nsswitch.yml
-- include: ./set_access_policy.yml
+- import_tasks: ./install_required.yml
+- import_tasks: ./join_domain.yml
+- import_tasks: ./setup_samba.yml
+- import_tasks: ./setup_nsswitch.yml
+- import_tasks: ./set_access_policy.yml

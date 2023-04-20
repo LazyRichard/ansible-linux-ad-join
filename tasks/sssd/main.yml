@@ -1,11 +1,11 @@
 ---
-- include: ./install_required.yml
+- include_tasks: ./install_required.yml
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- include: ./install_required_rpm.yml
+- include_tasks: ./install_required_rpm.yml
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
-- include: ./join_domain.yml
-- include: ./set_default_domain.yml
-- include: ./set_access_policy.yml
-- include: ./set_dyndns.yml
+- import_tasks: ./join_domain.yml
+- import_tasks: ./set_default_domain.yml
+- import_tasks: ./set_access_policy.yml
+- import_tasks: ./set_dyndns.yml
