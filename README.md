@@ -24,8 +24,11 @@ Requirements
 ### Target
 
 - Ubuntu 20.04
-  - Internet connection (currently proxy is not supported)
-  - python3-pexpect
+  - Internet connection (currently under proxy environment does not supported)
+
+- RHEL/Centos 7
+  - Internet connection (currently under proxy environment does not supported)
+  - NOTE: Centos 7 only tested with SSSD. if you want to use join with winbind, it may not work as expected
 
 Role Variables
 --------------

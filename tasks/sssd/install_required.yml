@@ -1,5 +1,5 @@
 ---
-- name: Install required package
+- name: Install required packages in Debian based distro
   become: yes
   apt:
     pkg:

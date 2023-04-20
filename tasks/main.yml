@@ -3,9 +3,6 @@
 - name: Validate variables
   include: ./validate.yml
 
-- name: "Install required by script package"
-  include: "./install_required_script.yml"
-
 - name: "Join '{{ domain_name }}' using '{{ join_method }}'"
   include: "./{{ join_method }}/main.yml"
 
@@ -16,3 +13,8 @@
 
 - name: Set options
   include: ./set_options.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Set options
+  include: ./set_options_rhel.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'

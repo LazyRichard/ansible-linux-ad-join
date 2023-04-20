@@ -32,6 +32,9 @@ galaxy_info:
     - name: Ubuntu
       versions:
       - focal
+    - name: Centos
+      versions:
+      - 7
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes

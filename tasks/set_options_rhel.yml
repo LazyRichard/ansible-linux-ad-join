@@ -1,0 +1,5 @@
+---
+- name: Set pam home direction creation
+  become: yes
+  command: authconfig --enablemkhomedir --update
+  when: user_home_creation | bool

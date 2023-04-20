@@ -1,0 +1,11 @@
+---
+- name: Install required packages in RPM based distro
+  become: yes
+  ansible.builtin.yum:
+    name:
+      - sssd
+      - sssd-ad
+      - sssd-tools
+      - realmd
+      - adcli
+      - samba-common-tools

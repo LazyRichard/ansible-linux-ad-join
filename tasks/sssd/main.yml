@@ -1,5 +1,10 @@
 ---
 - include: ./install_required.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- include: ./install_required_rpm.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
 - include: ./join_domain.yml
 - include: ./set_default_domain.yml
 - include: ./set_access_policy.yml

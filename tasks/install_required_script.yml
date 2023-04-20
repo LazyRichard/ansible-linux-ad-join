@@ -1,6 +1,0 @@
----
-- name: Install script required package
-  become: yes
-  apt:
-    pkg:
-      - python3-pexpect
