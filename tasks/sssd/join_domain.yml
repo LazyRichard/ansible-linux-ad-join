@@ -4,13 +4,41 @@
   changed_when: false
 
 - name: Join the Active Directory domain
-  become: yes
-  ansible.builtin.shell:
-    cmd: echo "{{ domain_admin_password }}" | realm join --user {{ domain_admin_user }} --os-name {{ ansible_distribution }} --os-version {{ ansible_distribution_version }} {{ domain_name }}
-  when: computer_name is not defined or not computer_name
+  block:
+    - name: Join the Active Directory domain
+      become: yes
+      ansible.builtin.shell:
+        cmd: echo "{{ domain_admin_password }}" | realm join --user {{ domain_admin_user }} --os-name {{ ansible_distribution }} --os-version {{ ansible_distribution_version }} {{ domain_name }}
+      ignore_errors: yes
+      no_log: yes
+      register: adjoin_result_reg
+      when: computer_name is not defined or not computer_name
 
-- name: "Join the Active Directory domain as {{ computer_name }}"
-  become: yes
-  ansible.builtin.shell:
-    cmd: echo "{{ domain_admin_password }}" |  realm join --computer-name {{ computer_name }} --user {{ domain_admin_user }} --os-name {{ ansible_distribution }} --os-version {{ ansible_distribution_version }} {{ domain_name }}
-  when: computer_name is defined and computer_name
+    - name: store result
+      ansible.builtin.set_fact:  
+        adjoin_result: "{{ adjoin_result_reg }}"
+      when: adjoin_result_reg["changed"]
+
+    - name: "Join the Active Directory domain as {{ computer_name }}"
+      become: yes
+      ansible.builtin.shell:
+        cmd: echo "{{ domain_admin_password }}" |  realm join --computer-name {{ computer_name }} --user {{ domain_admin_user }} --os-name {{ ansible_distribution }} --os-version {{ ansible_distribution_version }} {{ domain_name }}
+      ignore_errors: yes
+      no_log: yes
+      register: adjoin_result_reg
+      when: computer_name is defined and computer_name
+
+    - name: store result
+      ansible.builtin.set_fact:  
+        adjoin_result: "{{ adjoin_result_reg }}"
+      when: adjoin_result_reg["changed"]
+
+- name: Evaluate Active Directory Join result
+  block:
+    - debug:
+        msg: '{{ adjoin_result["stderr"] | regex_replace(domain_admin_password) }}'
+    - debug:
+        msg: '{{ adjoin_result["stdout"] | regex_replace(domain_admin_password) }}'
+    - fail:
+        msg: "failed to join '{{ domain_name }}'"
+  when: adjoin_result["rc"] != 0
