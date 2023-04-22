@@ -55,15 +55,26 @@ Role Variables
 
 - sssd configuration
 
-  the below configuration is stands for restrict login policy when using `sssd`. if you don't want to restrict login policy, than set `sssd_permit_deny_all`to `no` and leave blank others
+  - login policy
 
-  |variable|description|
-  |--------|-----------|
-  |`sssd_permit_deny_all`|disable login for all users and groups. this should be yes if want to restrict login with below allow list (default: yes)|
-  |`sssd_permit_allow_groups`|allow login specific groups<br/>(default: administrators, domain admins, enterprise admins)|
-  |`sssd_permit_allow_users`|give permission to login in specific user (default: blank)|
-  |`sssd_permit_block_groups`|block login specific groups (default: blank)|
-  |`sssd_permit_block_users`|block login specific users (default: blank)|
+    the below configuration is stands for restrict login policy when using `sssd`. if you don't want to restrict login policy, than set `sssd_permit_deny_all`to `no` and leave blank others
+
+    |variable|description|
+    |--------|-----------|
+    |`sssd_permit_deny_all`|disable login for all users and groups. this should be yes if want to restrict login with below allow list (default: yes)|
+    |`sssd_permit_allow_groups`|allow login specific groups<br/>(default: administrators, domain admins, enterprise admins)|
+    |`sssd_permit_allow_users`|give permission to login in specific user (default: blank)|
+    |`sssd_permit_block_groups`|block login specific groups (default: blank)|
+    |`sssd_permit_block_users`|block login specific users (default: blank)|
+
+  - dynamic dns update
+
+    |variable|description|
+    |--------|-----------|
+    |`sssd_dyndns_update`| enable/disable dyndns option (default: yes)|
+    |`sssd_dyndns_refresh_interval`| `dyndns_refresh_inverval` (default: 43200) |
+    |`sssd_dyndns_update_ptr`| `dyndns_update_ptr` (default: true)|
+    |`sssd_dyndns_ttl` | `dyndns_ttl` (default: 3600) |
 
 - winbind configuration
   
