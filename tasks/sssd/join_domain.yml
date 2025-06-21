@@ -1,5 +1,6 @@
 ---
 - name: Discover ad domain
+  become: yes
   command: realm discover "{{ domain_name }}"
   changed_when: false
 
