@@ -1,5 +1,5 @@
 ---
-- name: Install required packages in Debian based distro
+- name: Install required packages in Ubuntu
   become: yes
   apt:
     pkg:
@@ -8,3 +8,18 @@
       - realmd
       - adcli
       - dnsutils # some arm-based system need this
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install required packages in Debian
+  become: yes
+  apt:
+    pkg:
+      - packagekit
+      - realmd
+      - adcli
+      - sssd
+      - sssd-ad
+      - sssd-tools
+      - libnss-sss
+      - libpam-sss
+    when: ansible_distribution == "Debian"

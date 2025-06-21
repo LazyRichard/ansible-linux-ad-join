@@ -20,10 +20,12 @@ Requirements
 
 - ansible > 2.1
 
-
 ### Target
 
-- Ubuntu 20.04
+- Ubuntu
+  - Internet connection (currently under proxy environment does not supported)
+
+- Debian
   - Internet connection (currently under proxy environment does not supported)
 
 - RHEL/Centos 7
