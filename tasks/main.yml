@@ -9,7 +9,7 @@
 - name: Setup sudoers
   include_tasks: ./setup_sudoers.yml
   vars:
-    - template_sudoers: "{{ lookup('vars','template_sudoers_' + join_method) }}"
+    template_sudoers: "{{ lookup('vars','template_sudoers_' + join_method) }}"
 
 - name: Set options
   include_tasks: ./set_options.yml
