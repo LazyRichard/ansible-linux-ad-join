@@ -22,4 +22,4 @@
       - sssd-tools
       - libnss-sss
       - libpam-sss
-    when: ansible_distribution == "Debian"
+  when: ansible_distribution == "Debian"
