@@ -1,31 +1,31 @@
 ---
 - name: Set deny all
-  become: yes
+  become: true
   command: "realm deny --all"
   when: sssd_permit_deny_all
 
 - name: Apply allow groups
-  become: yes
+  become: true
   command: "realm permit -g {{ item | replace(' ', '\\ ') }}"
   loop: "{{ sssd_permit_allow_groups | default([], true) }}"
 
 - name: Apply allow users
-  become: yes
+  become: true
   command: "realm permit {{ item | replace(' ', '\\ ') }}"
   loop: "{{ sssd_permit_allow_users | default([], true) }}"
 
 - name: Apply block groups
-  become: yes
+  become: true
   command: "realm permit -g {{ item | replace(' ', '\\ ') }}"
   loop: "{{ sssd_permit_block_groups | default([], true) }}"
 
 - name: Apply block users
-  become: yes
+  become: true
   command: "realm permit {{ item | replace(' ', '\\ ') }}"
   loop: "{{ sssd_permit_block_users | default([], true) }}"
 
 - name: Gathering realm list
-  become: yes
+  become: true
   command: "realm list"
   register: raw_realm_output
 

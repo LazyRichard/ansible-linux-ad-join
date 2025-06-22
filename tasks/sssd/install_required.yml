@@ -1,6 +1,6 @@
 ---
 - name: Install required packages in Ubuntu
-  become: yes
+  become: true
   apt:
     pkg:
       - sssd-ad
@@ -11,7 +11,7 @@
   when: ansible_distribution == "Ubuntu"
 
 - name: Install required packages in Debian
-  become: yes
+  become: true
   apt:
     pkg:
       - packagekit

@@ -1,6 +1,6 @@
 ---
 - name: Add sudoers for active directory groups
-  become: yes
+  become: true
   template:
     src: "{{ template_sudoers }}"
     dest: "{{ sudoers_path }}/00-ad-{{ domain_name | replace('.', '-')}}"

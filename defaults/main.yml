@@ -15,12 +15,12 @@ domain_sudoers:
   - "administrators"
   - "domain admins"
   - "enterprise admins"
-user_home_creation: yes
-set_default_domain: yes
+user_home_creation: true
+set_default_domain: true
 
 ## sssd
 ### login policy
-sssd_permit_deny_all: yes
+sssd_permit_deny_all: true
 sssd_permit_allow_groups:
   - "administrators"
   - "domain admins"
@@ -29,7 +29,7 @@ sssd_permit_allow_users:
 sssd_permit_block_groups:
 sssd_permit_block_users:
 ### dynamic DNS updates
-sssd_dyndns_update: yes
+sssd_dyndns_update: true
 sssd_dyndns_refresh_interval: 43200
 sssd_dyndns_update_ptr: true
 sssd_dyndns_ttl: 3600
