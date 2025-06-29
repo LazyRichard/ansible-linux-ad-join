@@ -3,6 +3,9 @@
 - name: Validate variables
   include_tasks: ./validate.yml
 
+- name: Check if system is joined to {{ domain_name }}
+  include_tasks: ./test_join.yml
+
 - name: "Join '{{ domain_name }}' using '{{ join_method }}'"
   include_tasks: "./{{ join_method }}/main.yml"
 

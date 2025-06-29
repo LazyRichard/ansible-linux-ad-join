@@ -6,6 +6,7 @@
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - import_tasks: ./join_domain.yml
+  when: not is_joined
 - import_tasks: ./set_default_domain.yml
 - import_tasks: ./set_access_policy.yml
 - import_tasks: ./set_dyndns.yml

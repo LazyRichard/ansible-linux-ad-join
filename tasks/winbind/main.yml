@@ -1,6 +1,7 @@
 ---
 - import_tasks: ./install_required.yml
 - import_tasks: ./join_domain.yml
+  when: not is_joined
 - import_tasks: ./setup_samba.yml
 - import_tasks: ./setup_nsswitch.yml
 - import_tasks: ./set_access_policy.yml

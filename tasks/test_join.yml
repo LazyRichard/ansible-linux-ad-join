@@ -1,0 +1,10 @@
+---
+- name: Get list of joined realms
+  become: true
+  ansible.builtin.command: realm list --name-only
+  register: joined_realms
+  changed_when: false
+
+- name: Check if system is joined to {{ domain_name }}
+  ansible.builtin.set_fact:
+    is_joined: "{{ domain_name in joined_realms.stdout_lines }}"
