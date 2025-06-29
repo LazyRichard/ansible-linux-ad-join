@@ -1,21 +1,25 @@
 ---
 # handlers file for join_domain
 - name: Restart smbd
-  service:
+  become: true
+  ansible.builtin.service:
     name: smbd
     state: restarted
 
 - name: Restart nmbd
-  service:
+  become: true
+  ansible.builtin.service:
     name: nmbd
     state: restarted
 
 - name: Restart winbind
-  service:
+  become: true
+  ansible.builtin.service:
     name: winbind
     state: restarted
 
 - name: Restart sssd
-  service:
+  become: true
+  ansible.builtin.service:
     name: sssd
     state: restarted
