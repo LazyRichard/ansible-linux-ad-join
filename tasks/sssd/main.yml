@@ -5,6 +5,9 @@
 - include_tasks: ./install_required_rpm.yml
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
+- name: Check if system is joined to {{ domain_name }}
+  include_tasks: ./test_join.yml
+
 - import_tasks: ./join_domain.yml
   when: not is_joined
 - import_tasks: ./set_default_domain.yml
