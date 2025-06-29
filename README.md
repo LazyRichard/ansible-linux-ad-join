@@ -69,14 +69,14 @@ Role Variables
     |`sssd_permit_block_groups`|block login specific groups (default: blank)|
     |`sssd_permit_block_users`|block login specific users (default: blank)|
 
-  - dynamic dns update
+  - additional properties
+
+    The settings below can specify or change additional properties in `/etc/sssd/sssd.conf`.
 
     |variable|description|
     |--------|-----------|
-    |`sssd_dyndns_update`| enable/disable dyndns option (default: yes)|
-    |`sssd_dyndns_refresh_interval`| `dyndns_refresh_inverval` (default: 43200) |
-    |`sssd_dyndns_update_ptr`| `dyndns_update_ptr` (default: true)|
-    |`sssd_dyndns_ttl` | `dyndns_ttl` (default: 3600) |
+    |`sssd_additional_properties`|additional options in `sssd` section (default: blank dict)|
+    |`sssd_domain_additional_properties`|additional options in `domain/{{ domain_name }}` section (default: blank dict)|
 
 - winbind configuration
   

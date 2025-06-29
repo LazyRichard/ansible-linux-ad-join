@@ -1,0 +1,24 @@
+---
+- name: Add Additional SSSD global properties
+  become: true
+  community.general.ini_file:
+    path: /etc/sssd/sssd.conf
+    section: sssd
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: "{{ sssd_additional_properties | dict2items }}"
+  when: sssd_additional_properties | length > 0
+  notify: Restart sssd
+
+- name: Add additional SSSD domain properties
+  become: true
+  community.general.ini_file:
+    path: /etc/sssd/sssd.conf
+    section: "domain/{{ domain_name }}"
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop: "{{ sssd_domain_additional_properties | dict2items }}"
+  when: sssd_domain_additional_properties | length > 0
+  notify: Restart sssd

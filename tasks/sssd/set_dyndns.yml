@@ -1,8 +1,0 @@
----
-- name: Set Dynamic DNS Updates
-  become: true
-  ansible.builtin.template:
-    src: sssd_dns.conf.j2
-    dest: "{{ sssdh_configd_path }}/90-{{ domain_name | replace('.', '-')}}-dyndns.conf"
-  notify: Restart sssd
-  when: sssd_dyndns_update

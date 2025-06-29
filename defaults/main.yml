@@ -28,11 +28,9 @@ sssd_permit_allow_groups:
 sssd_permit_allow_users:
 sssd_permit_block_groups:
 sssd_permit_block_users:
-### dynamic DNS updates
-sssd_dyndns_update: true
-sssd_dyndns_refresh_interval: 43200
-sssd_dyndns_update_ptr: true
-sssd_dyndns_ttl: 3600
+### additional properties
+sssd_additional_properties: {}
+sssd_domain_additional_properties: {}
 
 # winbind
 ### idmap

@@ -9,4 +9,4 @@
   when: not is_joined
 - import_tasks: ./set_default_domain.yml
 - import_tasks: ./set_access_policy.yml
-- import_tasks: ./set_dyndns.yml
+- import_tasks: ./set_additional_properties.yml
