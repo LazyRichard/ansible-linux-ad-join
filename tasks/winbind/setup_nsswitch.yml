@@ -7,6 +7,7 @@
         regexp: '^(passwd:.*)'
         replace: '\1 winbind'
         backup: yes
+
     - name: Append group entry
       become: yes
       replace:
