@@ -10,6 +10,9 @@
 
 - import_tasks: ./join_domain.yml
   when: not is_joined
+
 - import_tasks: ./set_default_domain.yml
+
 - import_tasks: ./set_access_policy.yml
+
 - import_tasks: ./set_additional_properties.yml

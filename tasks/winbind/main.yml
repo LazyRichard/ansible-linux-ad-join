@@ -1,9 +1,14 @@
 ---
 - import_tasks: ./install_required.yml
+
 - name: Check if system is joined to {{ domain_name }}
   include_tasks: ./test_join.yml
+
 - import_tasks: ./join_domain.yml
   when: not is_joined
+
 - import_tasks: ./setup_samba.yml
+
 - import_tasks: ./setup_nsswitch.yml
+
 - import_tasks: ./set_access_policy.yml
